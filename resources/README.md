@@ -159,10 +159,20 @@ gitignored.
 
 ## Clinical temporal ontologies and corpora
 
-- **CNTRO** (Clinical Narrative Temporal Relation Ontology): C. Tao et al., AMIA Annual
-  Symposium 2010, <https://pubmed.ncbi.nlm.nih.gov/21347085/>. An OWL ontology for temporal
-  relations in clinical narratives. *Why it matters*: prior art that is very close to what the
-  rubric asks for; we should know what it did and why it did not become standard.
+- **CNTRO** (Clinical Narrative Temporal Relation Ontology): C. Tao et al., "CNTRO: A Semantic
+  Web Ontology for Temporal Relation Inferencing in Clinical Narratives", AMIA Annual Symposium
+  2010, <https://pubmed.ncbi.nlm.nih.gov/21347086/>; and "CNTRO 2.0: A Harmonized Semantic Web
+  Ontology for Temporal Relation Inferencing in Clinical Narratives", AMIA Joint Summits 2011,
+  <https://pubmed.ncbi.nlm.nih.gov/22211182/>. An OWL ontology for temporal relations in
+  clinical narratives, with inference. *Why it matters*: prior art that is very close to what
+  the rubric asks for; we should know what it did and why it did not become standard.
+- **CNTRO applied to adverse events**: K. K. Clark et al., "Application of a temporal reasoning
+  framework tool in analysis of medical device adverse events", AMIA Annual Symposium 2011,
+  <https://pubmed.ncbi.nlm.nih.gov/22195199/>; and K. Clark et al., "A use case study on late
+  stent thrombosis for ontology-based temporal reasoning and analysis", Journal of Biomedical
+  Semantics 2014, <https://pubmed.ncbi.nlm.nih.gov/25540680/>. *Why it matters*: ontology-based
+  temporal reasoning over adverse-event reports is one of the three NIH domains; these are the
+  closest published precedents for the pharmacovigilance competency questions.
 - **TEO** (Time Event Ontology): F. Li et al., "Time event ontology (TEO): to support semantic
   representation and reasoning of complex temporal relations of clinical events", JAMIA 27(7),
   2020, <https://doi.org/10.1093/jamia/ocaa058>. Successor to CNTRO with reasoning support.
