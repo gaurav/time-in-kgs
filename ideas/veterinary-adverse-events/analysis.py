@@ -267,12 +267,15 @@ def _(mo):
         > For adverse-event report R, which drugs were co-administered during the 30 days before
         > the event onset, and which were started within 7 days of it?
 
-        The report below is chosen deterministically: the one with the most drugs that have both
-        an exposure date and an onset date. A drug counts as *active in the 30 days before
-        onset* if its first exposure is on or before onset and its last exposure (or an open end)
-        is within 30 days before onset; it counts as *started within 7 days* if the first
-        exposure falls in the week ending at onset. Below it, the same classification across all
-        drug rows with both dates.
+        The report below is chosen deterministically: among reports with four to six drugs
+        that have both an exposure date and an onset date, the one with the most distinct
+        ingredients (lowest ID on ties). A drug counts as *active in the 30 days before onset*
+        if its first exposure is on or before onset and its last exposure (or an open end) is
+        within 30 days before onset; it counts as *started within 7 days* if the first exposure
+        falls in the week ending at onset. Below it, the same classification across all drug
+        rows with both dates. The handful of rows that are "started within 7 days" yet not
+        "active" can only arise when the last exposure precedes the first: an internal
+        inconsistency that a validity-interval axiom would catch.
         """
     )
     return
@@ -284,7 +287,8 @@ def _(mo, sql):
         """
         SELECT d.id FROM drugs d JOIN reports r USING (id)
         WHERE r.onset_date IS NOT NULL AND d.first_exposure IS NOT NULL
-        GROUP BY d.id ORDER BY count(*) DESC, d.id LIMIT 1
+        GROUP BY d.id HAVING count(*) BETWEEN 4 AND 6
+        ORDER BY count(DISTINCT d.ingredients) DESC, d.id LIMIT 1
         """
     )["id"][0]
     m01_windows = f"""
@@ -319,10 +323,12 @@ def _(mo):
 
         D = the isoxazoline flea-and-tick drugs (afoxolaner, fluralaner, sarolaner, lotilaner),
         matched on active ingredient because combination products carry other ATCvet codes.
-        A = any VeDDRA seizure or convulsion term. "Onset before exposure" is usually not an
-        impossibility: the exposure recorded is a later dose, and `previous_exposure_to_drug`
-        says whether the animal had the product before. A temporal model has to hold both the
-        recorded dose interval and the possibility of earlier, unrecorded doses.
+        A = any VeDDRA seizure or convulsion term. "Onset before recorded exposure" need not be
+        an impossibility: the recorded exposure may be a later dose, and
+        `previous_exposure_to_drug` says whether the animal had the product before. Where that
+        flag is `false`, the ordering is evidence against the drug or a data error. A temporal
+        model has to hold the recorded dose interval, the possibility of earlier unrecorded
+        doses, and the difference between the two.
         """
     )
     return
