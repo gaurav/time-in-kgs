@@ -22,9 +22,18 @@ gitignored.
   Its value is that NIH marks two axioms as examples of "machine-verifiable axioms beyond the
   class hierarchy": an equivalence to an existential restriction plus a disjointness
   (`C ≡ p some (E and (A or B))`, `C disjointWith D`) and a covering axiom (`E ≡ F or G`). Read
-  it as a statement of the *minimum* the Ontology Rigor criterion (20%) expects. Note that its
-  two explanatory comments are wrapped in literal parentheses outside the XML comment markers,
-  so check that strict RDF/XML parsers accept it before mirroring its structure.
+  it as a statement of the *minimum* the Ontology Rigor criterion (20%) expects. **The file is
+  not valid RDF/XML as published**: its two explanatory comments are wrapped in literal
+  parentheses outside the XML comment markers (lines 76 and 111), and RDF/XML allows only
+  whitespace between node elements. Checked 2026-10-07 with
+  [`tools/check-owl.scala`](../tools/check-owl.scala): strict Jena 5.2.0 rejects it
+  ("Non-whitespace text content between element tags"), and so does the OWL API 4.5.29's own
+  RDF/XML parser ("Expecting an object element instead of character content"). It loads in
+  ROBOT and Protégé only because the OWL API then falls back to RDF4J Rio's more lenient
+  RDF/XML parser, and rdflib 7.6.0 silently drops the stray text. Removing the parentheses
+  makes it pass every parser, with the same 49 triples and 5 logical axioms; HermiT finds it
+  consistent with no unsatisfiable classes. Don't copy its layout by hand, and run our own
+  ontology file through a strict parser before submitting.
 
 ## Knowledge graphs and tooling built at or with RENCI
 
