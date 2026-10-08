@@ -177,6 +177,35 @@ gitignored.
   and end dates; drug label histories via DailyMed <https://dailymed.nlm.nih.gov/>. *Why it
   matters*: public pharmacovigilance data with the timestamps needed for exposure-window and
   label-change questions. Download targets: `data/faers/`, `data/dailymed/`.
+- **openFDA Animal & Veterinary adverse events**
+  <https://open.fda.gov/apis/animalandveterinary/event/>, bulk files listed at
+  <https://api.fda.gov/download.json>, licence CC0 1.0 (<https://open.fda.gov/license/>).
+  FDA Center for Veterinary Medicine reports, one JSON file per quarter (about 4 MB zipped,
+  16,000 to 22,000 reports each), with receive date, onset date, per-drug exposure intervals,
+  dechallenge and rechallenge flags, VeDDRA reactions and ATCvet codes. *Why it matters*: the
+  smallest public pharmacovigilance dataset with both valid-time and transaction-time stamps,
+  so no-leakage reasoning can be demonstrated on it (Reasoning Correctness, 25%). Fetch with
+  `ideas/veterinary-adverse-events/download_openfda_animal.py` into
+  `data/openfda/animalandveterinary/event/`; see
+  [ideas/veterinary-adverse-events/](../ideas/veterinary-adverse-events/README.md).
+- **Integrated Canine Data Commons** (ICDC) <https://caninecommons.cancer.gov/>, GraphQL API
+  at `https://caninecommons.cancer.gov/v1/graphql/` (open, no login, trailing slash required),
+  data model <https://cbiit.github.io/icdc-model-tool/>. NCI's commons for canine cancer
+  studies; the CRDC repository page
+  (<https://datacommons.cancer.gov/repository/integrated-canine-data-commons>) says all data
+  are open access and may be published with attribution. *Why it matters*: per-dog trial
+  records with dated visits, adverse events and treatment pathways, a care-pathway analogue
+  without PHI. Fetch with `ideas/veterinary-adverse-events/download_icdc.py` into
+  `data/icdc/`. The API's treatment nodes were empty on 2026-10-07; the dated pathways are in
+  the study-level spreadsheets the script also fetches.
+- **Vocabularies in the veterinary data**, none of them OBO or NLM, which matters for the
+  Ontology Rigor criterion: **VeDDRA** (EMA's Veterinary Dictionary for Drug Regulatory
+  Activities; combined list, revision 17:
+  <https://www.ema.europa.eu/en/documents/regulatory-procedural-guideline/combined-veterinary-dictionary-drug-regulatory-activities-veddra-list-clinical-terms-reporting-suspected-adverse-events-animals-humans-veterinary-medicinal-products-rev17_en.pdf>),
+  **ATCvet** (<https://atcddd.fhi.no/atcvet/>), and **VCOG-CTCAE v2** for trial adverse
+  events (LeBlanc et al. 2021, <https://doi.org/10.1111/vco.12677>). The OBO side: the
+  **Vertebrate Breed Ontology** (VBO, <https://obofoundry.org/ontology/vbo.html>) for breeds
+  and NCBITaxon for species.
 - **ClinicalTrials.gov** <https://clinicaltrials.gov/> with its record version history. *Why it
   matters*: evidence that changes over time, with timestamps.
 - **Infectious-disease surveillance**: Nextstrain <https://nextstrain.org/> (dated phylogenies
