@@ -100,6 +100,11 @@ This repository is public on GitHub. Before committing anything, check:
   `resources/README.md` with a target path under `data/<name>/`.
 - **No PHI, ever.** Use synthetic or openly licensed data, and label synthetic data as synthetic
   everywhere it appears.
+- **Data a public source lets anyone download, without login or terms, is already public.**
+  Keep it under `data/`, and check small excerpts into the repo when a document needs them,
+  citing the source and the snapshot date. If some of it looks like a confidentiality breach
+  (names, contact details, anything the source would not knowingly publish), don't commit it;
+  open an issue here on the `Upstream` milestone so it can be reported to the source.
 - **Name people only alongside their public work.** It is fine to say that a colleague built a
   publicly available tool and link to it. Do not attribute private conversations, unpublished
   plans, or opinions to anyone.
