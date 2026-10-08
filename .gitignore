@@ -7,3 +7,7 @@
 # Scala CLI build output and IDE (BSP) files
 .scala-build/
 .bsp/
+
+# marimo and Python caches
+__marimo__/
+__pycache__/
