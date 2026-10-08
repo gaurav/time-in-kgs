@@ -114,6 +114,7 @@ README.md                 short orientation
 ideas/                    one Markdown file per idea; promote to ideas/<name>/ when it needs scripts or several files
 competency-questions/     what a successful temporal KG must be able to answer, by domain and difficulty
 resources/                annotated links to graphs, standards, tooling, and papers; download instructions for data/
+tools/                    Scala CLI scripts (dependencies declared inline), e.g. check-owl.scala for strict parsing and reasoning
 data/                     gitignored scratch and downloaded material
 ```
 

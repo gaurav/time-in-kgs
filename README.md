@@ -16,5 +16,7 @@ decide whether and how to enter.
   winning temporal KG should answer, across the three domains NIH names.
 - [ideas/](ideas/README.md): candidate approaches and how each maps onto the rubric.
 - [resources/](resources/README.md): annotated links to graphs, standards, tooling, and papers.
+- [tools/](tools/README.md): small scripts, starting with a strict parse and reasoner check for
+  OWL files.
 
 Downloaded material and scratch files live in `data/`, which is not committed.
