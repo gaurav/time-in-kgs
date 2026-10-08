@@ -29,9 +29,10 @@ A plausible entry uses the three as layers rather than alternatives:
 - **Data and workflow**: synthetic longitudinal cases (care pathways), plus public
   pharmacovigilance and surveillance data, framed around a specific decision a clinician or
   epidemiologist makes.
-- **Representation**: Biolink associations carrying `temporal_context_qualifier` /
-  `temporal_interval_qualifier`, with intervals expressed in OWL-Time and provenance timestamps
-  in PROV-O. The Wikidata comparison explains the design choice.
+- **Representation**: Biolink associations linked to OWL-Time intervals, with provenance
+  timestamps in PROV-O. Biolink's `temporal_interval_qualifier` is string-valued as published,
+  so this needs an extension or a proposed Biolink change (see
+  [resources](../resources/README.md#standards-the-rubric-names-or-implies)). The Wikidata comparison explains the design choice.
 - **Reasoning and verification**: OWL axioms over RO/OWL-Time relations that make impossible
   orderings unsatisfiable, checked with the same reasoners the GO-CAM and Ubergraph stacks use,
   so the "unsatisfiable classes" metric is produced by standard tooling.

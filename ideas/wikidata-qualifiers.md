@@ -64,9 +64,10 @@ revised, or a drug label that gained a boxed warning, and represent it three way
 
 1. **Wikidata-style**: a statement node with `P580`/`P582`-like qualifiers and a rank.
 2. **RDF-star**: the triple quoted, with validity-interval and provenance properties on it.
-3. **Biolink + OWL-Time + PROV-O**: an association with `temporal_interval_qualifier` pointing
-   at a `time:ProperInterval`, and `prov:generatedAtTime` / `prov:invalidatedAtTime` for when it
-   became and stopped being the endorsed claim.
+3. **Biolink + OWL-Time + PROV-O**: an association linked to a `time:ProperInterval`, and `prov:generatedAtTime` / `prov:invalidatedAtTime` for when it
+   became and stopped being the endorsed claim. Biolink's `temporal_interval_qualifier` cannot
+   be that link as published (it is a string-valued datatype property; see [resources](../resources/README.md#standards-the-rubric-names-or-implies)), so this
+   variant also tests what a Biolink change would need to say.
 
 Then write the same three questions against each ("what is recommended now?", "what was
 recommended on date D?", "when did the recommendation change and on what evidence?") and

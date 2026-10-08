@@ -90,9 +90,29 @@ gitignored.
 - **Biolink Model** <https://biolink.github.io/biolink-model/>. Named in the Ontology Rigor
   criterion. Already has association-level slots
   [`temporal_context_qualifier`](https://biolink.github.io/biolink-model/temporal_context_qualifier/)
-  (a time constraint on the truth value of an association, range `TimeType`) and its child
-  `temporal_interval_qualifier`. *Why it matters*: a temporal design that extends these slots
-  is "Biolink-consistent" by construction; one that ignores them will have to explain why.
+  (a time constraint on the truth value of an association) and its child
+  [`temporal_interval_qualifier`](https://biolink.github.io/biolink-model/temporal_interval_qualifier/).
+  **Neither can point at an OWL-Time interval.** Checked 2026-10-07 against release v4.4.5
+  (unchanged on `master` at `a4180f8`):
+  - `temporal_interval_qualifier` declares no range, so it inherits `time type` from its parent.
+    That is a literal type (`uri: xsd:string`, `typeof: time`, described as "a lexical
+    representation of xsd:time", which is a time of day), not a class.
+  - The generated OWL makes both slots `owl:DatatypeProperty`, and `temporal_context_qualifier`
+    has `rdfs:range xsd:string`. Giving it a `time:ProperInterval` IRI as a value would make it
+    an object property as well, which OWL 2 DL forbids.
+  - No class lists `temporal_interval_qualifier` among its slots. The only association that uses
+    either slot is `exposure event to outcome association`, and it uses
+    `temporal_context_qualifier`. Biolink's SHACL shape for `Association` is closed and doesn't
+    list `temporal_interval_qualifier`. pyshacl 0.40.1 rejects a synthetic `Association` carrying
+    it (a `ClosedConstraintComponent` violation), whether the value is an interval IRI or a
+    string.
+
+  *Why it matters*: the Ontology Rigor criterion (20%) asks for Biolink consistency, and our
+  ideas assumed these slots could carry OWL-Time intervals. They can't as published. Options
+  are to propose a Biolink change (a class range for `temporal_interval_qualifier`, aligned to
+  `time:ProperInterval`, and adding it to association slots), or to use our own object property
+  mapped to the Biolink slot and say why in the write-up. An upstream proposal would also
+  speak to Feasibility & Integration (15%).
 - **OWL-Time** <https://www.w3.org/TR/owl-time/>, namespace `http://www.w3.org/2006/time#`.
   Named in the submission requirements as an acceptable vocabulary. `time:Instant`,
   `time:ProperInterval`, `time:hasBeginning`, `time:hasEnd`, `time:inXSDDateTimeStamp`, and the

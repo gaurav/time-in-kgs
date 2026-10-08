@@ -91,9 +91,10 @@ The case is a ready-made specimen of every temporal phenomenon the challenge tex
 ## Smallest useful experiment
 
 1. Hand-convert the one example case to a small temporal KG, in Turtle, using Biolink
-   categories for nodes, Biolink associations with `temporal_interval_qualifier` for facts that
-   have validity intervals, OWL-Time intervals for the dates, and PROV-O timestamps for when
-   each fact became known. Expect on the order of a few hundred triples.
+   categories for nodes, Biolink associations linked to OWL-Time intervals for facts that have
+   validity intervals, and PROV-O timestamps for when each fact became known. Biolink's
+   `temporal_interval_qualifier` is a string-valued datatype property, so the link to the
+   interval needs our own object property or a proposed Biolink change (see [resources](../resources/README.md#standards-the-rubric-names-or-implies)). Expect on the order of a few hundred triples.
 2. Produce the **static baseline** mechanically by dropping every temporal triple.
 3. Write SPARQL for the care-pathway competency questions
    ([competency-questions/care-pathways.md](../competency-questions/care-pathways.md)) and run
