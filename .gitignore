@@ -1,2 +1,9 @@
 # Scratch directory: /data/
 /data/
+
+# macOS
+.DS_Store
+
+# Scala CLI build output and IDE (BSP) files
+.scala-build/
+.bsp/
